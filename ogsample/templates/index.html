@@ -1,0 +1,125 @@
+{% extends "layout.html" %}
+
+{% block fullpage %}
+<body>
+
+    <div id="container">
+        <header>
+                <div class="shim">
+                    <div id="top-header" class="clearfix">
+                        <div id="logo">
+                            <a href="/" title="Organo Gold Logo"><img src="/static/img/logo.png" alt="Organo Gold" /></a>
+                        </div>
+                        <div id="header-right">
+                            <div id="header-video-label">
+                                <h2>Sending samples has<br />never been so simple.</h2>
+                                <p>Find out how it works <img src="/static/img/icon-arrow.png" alt="Find out how it works" /></p>
+                            </div>
+                            <div id="header-video-thumb"> 
+                                <a href="http://vimeo.com/moogaloop.swf?clip_id=7239558&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;autoplay=1" title="Click to play video" rel="shadowbox;width=640;height=360;">
+                                    <img src="/static/img/thumb-video.png" alt="Organo Information Video" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="sub-header" class="clearfix">
+                        <h2>Welcome to the Sample Solution!</h2>
+                    </div>
+                </div>
+        </header>
+        
+        <div id="banner" style="padding-bottom: 2em;">
+            <div id="banner-content" class="clearfix home-version">
+
+                <div id="banner-home-left" class="clearfix">
+                    <div id="banner-home-left-left">
+                        <img src="/static/img/img-pricing.png" alt="Only $4.95 each" />
+                    </div>
+                    <div id="banner-home-left-right">
+                        <h3>Each package includes:</h3>
+                            <ul>
+                                <li>2 COFFEE SAMPLES</li>
+                                <li>DVD</li>
+                                <li>POSTAGE</li>
+                            </ul>
+                    </div>
+                    <br clear="all" />
+                    <p>
+                        <img id="divider" src="/static/img/divider.png" alt="The best sample solution" /><br/>
+                        Send long distance samples in less than a minute!
+                    </p>
+                </div>
+                <div id="banner-home-right">
+                    <p>All you have to do is login to start sending ultra high quality samples automatically.</p>
+                    <a href="{{url_for('start')}}" class="button">Get Started</a>
+                    <p style="font-size: 1em;">It's free to <a href="{{url_for('signup')}}">sign up for an account</a>, if you already have an account just <a href="{{url_for('login')}}">log in to begin</a>.</p>
+                </div>
+            </div>
+            <div id="banner-btm"><!-- sliding BG --></div>
+        </div>
+        
+        
+        <div id="main">
+            <div id="content">
+                <div class="shim">
+                {% if messages %}
+                    <ul class="flashes">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}">{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+                    <div class="content">
+                        
+                        
+                            <div class="grids clearfix">
+                                <div class="grid grid-5">
+                                    <a href="/static/img/img-package.jpg" rel="shadowbox;width=582;height=387;"><img src="/static/img/thumb-package.png" alt="Organo Information Video" /></a>
+                                </div>
+                                <div class="grid grid-5">
+                                    <ul id="home-features">
+                                        <li>9 x 12 color envelope</li>
+                                        <li>Latte sample</li>
+                                        <li>Black coffee sample</li>
+                                        <li>Personalized message</li>
+                                        <li>DVD about the business</li>
+                                        <li>Postage paid</li>
+                                    </ul>
+                                </div>
+                                <div class="grid grid-5">
+                                    <a href="/static/img/img-package.jpg" rel="shadowbox;width=582;height=387;">
+                                        <img src="/static/img/thumb-package-back.png" alt="Organo Information Video" />
+                                    </a>
+                                </div>
+                            </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div id="content-btm"><!-- sliding BG --></div>
+        </div>
+        
+    </div>
+
+    
+    <footer class="clearfix">
+        <div>
+            <p>
+            &copy;2011 OGsamples.com<br />
+            email: <a href="mailto:contact@ogsamples.com">contact@ogsamples.com</a><br />
+            phone: 800.555.5555
+            </p>
+        </div>
+        <div>
+            <a href="Question.html">Have A Question?</a> | 
+            <a href="Privacy-Policy.html">Privacy Policy</a>
+        </div>
+        <div>
+            <a href="https://www.braintreegateway.com/merchants/YOUR_MERCHANT_ID/verified" target="_blank" title="Secured By Braintree"><img src="/static/img/securedby-braintree.png" alt="Secured by Braintree" /></a>
+        </div>
+    </footer>
+  </div> <!--! end of #container -->
+{% include 'bottomjs.html' %} 
+</body>
+{% endblock %}

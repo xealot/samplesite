@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{%- macro showfield(field, name) -%}
+    <p>{{field.label.text}}</p>{{field(**kwargs)}}
+{% endmacro %}
+
+{% block heading %}Step One: Enter your Contact's Information.{% endblock %}
+
+{% block body %}
+<p>
+    The first step in creating a sample is to tell us where we can ship the package. In addition to your contact's 
+    address we also ask for a note. If you fill out the note field your sample will be personalized with that text 
+    and your contact will know it came from you.
+</p>
+{% if obj %}
+<p style="color: green;">
+    You are editing a saved sample: {{obj.sample_data.name}}
+</p>
+{% endif %}
+<div class="window">
+    <div class="header">
+        <h2>Enter Contact Details Below</h2>
+    </div>
+    <div class="body">
+        <form id="stepone" action="" method="post">
+            {% csrf_token %}
+            {{ forms.form_errors(form) }}
+            <ul class="forms">
+                {{ forms.form_field(form.email) }}
+                {{ forms.form_field(form.name) }}
+                {{ forms.form_field(form.message) }}
+            </ul>
+            <div id="secure-form-box">
+                <ul>
+                {{ forms.form_field(form.address1) }}
+                {{ forms.form_field(form.address2) }}
+                {{ forms.form_field(form.country, class="auto-country") }}
+                <li>
+                    <div id="auto-country" class="clearfix">
+                        {{ forms.form_field_label(form.postal) }}
+                        {{ forms.form_field_description(form.postal) }}
+                        {{ forms.form_field_errors(form.postal) }}
+                        <div style="float: left;">
+                            <div class="field">{{ form.postal(class="small auto-zip") }}</div>
+                        </div>
+                        <div style="float: left; margin-left: 1em;">
+                            {{ form.city(readonly="readonly", tabindex="-1", style="width: 150px; color: #999;", class="auto-city") }}
+                        </div>
+                        <div style="float: left; margin-left: 1em;">
+                            {{ form.state(readonly="readonly", tabindex="-1", style="width: 50px; color: #999;", class="auto-state") }}
+                        </div>
+                    </div>
+                    <span style="color: #777;">City and State are automatically filled.</span>
+                </li>
+            </ul>
+            </div>
+            <div class="form">
+                <button id="login-btn" type="submit">Save and Continue</button>
+            </div>
+        </form>
+    </div>
+</div>
+<p>
+    <strong>Our Guarantee:</strong> Your contact's information is never, <u>ever</u> going to be sold. The information 
+    you enter here is considered private and sensitive and is treated as such.
+</p>
+
+{% endblock %}

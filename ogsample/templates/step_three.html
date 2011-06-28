@@ -1,0 +1,90 @@
+{% extends "layout.html" %}
+{% block heading %}Step Three: Checkout.{% endblock %}
+
+{% block body %}
+<div class="window">
+    <div class="header">
+        <h2>Enter Payment Information Below.</h2>
+    </div>
+    <div class="body">
+        <form id="stepone" action="{{post_url}}" method="post">
+            {{ forms.form_errors(form) }}
+            <ul class="forms">
+                {{ forms.form_field(form.transaction__customer__email) }}
+                {{ forms.form_field(form.transaction__customer__phone) }}
+                {{ forms.form_field(form.transaction__billing__country_code_alpha2, class="auto-country") }}
+                <li>
+                    <div id="auto-country" class="clearfix">
+                        {{ forms.form_field_label(form.transaction__billing__postal_code) }}
+                        {{ forms.form_field_description(form.transaction__billing__postal_code) }}
+                        {{ forms.form_field_errors(form.transaction__billing__postal_code) }}
+                        <div style="float: left;">
+                            <div class="field">{{ form.transaction__billing__postal_code(class="small auto-zip") }}</div>
+                        </div>
+                        <div style="float: left; margin-left: 1em;">
+                            {{ form.transaction__billing__locality(readonly="readonly", tabindex="-1", style="width: 150px; color: #999;", class="auto-city") }}
+                        </div>
+                        <div style="float: left; margin-left: 1em;">
+                            {{ form.transaction__billing__region(readonly="readonly", tabindex="-1", style="width: 50px; color: #999;", class="auto-state") }}
+                        </div>
+                    </div>
+                    <span style="color: #777;">City and State are automatically filled.</span>
+                </li>
+            </ul>
+            <div id="secure-form-box">
+                {{ forms.form_field(form.tr_data) }}
+                <div id="secure-content" class="clearfix">
+                    <div id="secure-title">
+                        <h3>Secure Credit Card Payment</h3>
+                        <p>This form submits to a 2048-bit encrypted SSL location.</p>
+                    </div>
+                    <div id="secured-by">
+                        <a  href="https://www.braintreegateway.com/merchants/ss37wjw57f8wz9k4/verified" target="_blank">
+                            <img src="https://braintree-badges.s3.amazonaws.com/05.png" border="0" alt="Secured by Braintree"/>
+                        </a>
+                    </div>
+                </div>
+                <ul class="forms">
+                    {{ forms.form_field(form.transaction__credit_card__cardholder_name) }}
+                    <li>
+                        <div class="clearfix">
+                            {{ forms.form_field_label(form.transaction__credit_card__number) }}
+                            {{ forms.form_field_description(form.transaction__credit_card__number) }}
+                            {{ forms.form_field_errors(form.transaction__credit_card__number) }}
+                            <div style="float: left;">
+                                <div class="field">{{ form.transaction__credit_card__number(style="width: 15em;") }}</div>
+                            </div>
+                            <div style="float: left; padding: 6px 0; margin-left: 0.5em;">
+                                <img src="/static/img/new/card_strip.png" alt="accepted"/>
+                            </div>
+                        </div>
+                    </li>
+                    {{ forms.form_field(form.expdate) }}
+                    <li>
+                        <div class="clearfix">
+                            {{ forms.form_field_label(form.transaction__credit_card__cvv) }}
+                            {{ forms.form_field_description(form.transaction__credit_card__cvv) }}
+                            {{ forms.form_field_errors(form.transaction__credit_card__cvv) }}
+                            <div style="float: left;">
+                                <div class="field">{{ form.transaction__credit_card__cvv(class="small") }}</div>
+                            </div>
+                            <div style="float: left; padding: 6px 0; margin-left: 0.5em;">
+                                <img src="/static/img/new/card_back_crop.png" alt="card back"/>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <ul class="forms">
+                 {{ forms.form_field(form.transaction__options__store_in_vault, value='true') }}   
+            </ul>
+            <div class="form">
+                <p>When you click the <strong>Submit My Order</strong> button the information you entered will be validated and then 
+                    sent to our warehouse where your samples will be printed and shipped.</p>
+                <button type="submit">Submit My Order</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

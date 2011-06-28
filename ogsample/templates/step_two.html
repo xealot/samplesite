@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% block heading %}Step Two: Add or Complete?{% endblock %}
+
+{% block body %}
+<div class="grids clearfix">
+    <div class="grid grid-6">
+        <h3>These are the samples you have setup so far:</h3>
+        <table id="review-table">
+            {% for sample in pending %}
+            <tr>
+                <td>
+                    <a href="{{url_for('step_one_edit', pending_id=sample._id)}}" class="review-edit">
+                        <img src="/static/img/edit.png" alt="Edit" /> {{sample.sample.name}}
+                    </a>
+                </td>
+                <td>
+                    <a href="{{url_for('step_two_delete', pending_id=sample._id)}}" class="review-delete">
+                        <img src="/static/img/x.png" alt="Edit" /> DELETE
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <p><strong>To Change or Review</strong>: Click on the name of the sample and you can edit its details.</p>
+        <a class="button minor" href="{{url_for('step_one')}}" title="Add Sample">Add Another Sample</a>
+    </div>
+    <div class="grid grid-9" style="float: right;">
+        <form action="" method="post">
+            <div id="order-review">
+                <p style="font-size: 1.8em; text-align: center; font-weight: bold;">
+                    {{count}} Samples
+                    <span style="color: #999;">x</span> ${{'%.2f'|format(cost)}}
+                    <span style="color: #999;">=</span> ${{'%.2f'|format(total)}}
+                </p>
+                <p>
+                    You are about to order {{count}} samples.
+                </p>
+                <p>
+                    Each sample costs, ${{'%.2f'|format(cost)}}.
+                </p>
+                <p>
+                    <button>Finalize My Order for ${{'%.2f'|format(total)}}</button>
+                </p>
+                <p style="color: #999;">There is one more step before your Credit Card is charged.</p>
+            </div>
+        </form>
+        <p class="right">
+
+        </p>
+    </div>
+</div>
+{% endblock %}

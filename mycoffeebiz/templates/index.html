@@ -1,0 +1,258 @@
+{% import 'macros/forms.html' as forms %}
+
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title></title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="{{STATIC_URL}}css/style.css?v=2">
+    <link rel="stylesheet" href="{{STATIC_URL}}css/prettyPhoto.css" type="text/css" media="screen" charset="utf-8" />
+    <script src="{{STATIC_URL}}js/libs/modernizr-1.7.min.js"></script>
+</head>
+
+<body>
+	<div id="top-bar">
+		<div class="wrapper">
+			<a href="#">Login</a> | <a href="#">I want a site like this</a>
+		</div>
+	</div>
+    <div class="wrapper">
+        <div id="left-col">
+            <h1 id="page-title">#1 Beverage in the World. <br /> 400 Billion Cups a Day.</h1>
+            <h2 id="page-subhead">Create a great income by sampling gourmet coffee. We'll show you how!</h2>
+                <div id="video-container">
+
+                <div id="video-box">
+                    <a href="http://www.youtube.com/watch?v=kh29_SERH0Y&rel=0" rel="prettyPhoto" ><img src="{{STATIC_URL}}img/video-placeholder.jpg" alt="video-placeholder" width="522" height="316" /></a>
+
+                    <div class="banner">
+                        <a href="#"><img src="{{STATIC_URL}}img/facebook.jpg" alt="facebook" width="57" height="18" /></a>
+                        <a href="#"><img src="{{STATIC_URL}}img/tweet.png" alt="tweet" width="55" height="20" /></a>
+                        <p>Share this video with your friends</p>
+                    </div>
+                </div>
+
+                <div class="ribbon"><h2>When was the last time Starbucks sent you a check?</h2></div>
+
+            </div>
+
+            <section id="member">
+                <div class="member-photo">
+                    <img src="{{STATIC_URL}}img/small-placeholder.jpg" alt="small-placeholder" width="121" height="138" />
+                </div>
+                <h2>This site is brought to you by:</h2>
+                <h1>Member Name</h1>
+                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nulla vitae elit libero, a pharetra augue. vel scelerisque nisl consectetur et. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
+                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nulla vitae elit libero, a pharetra augue. vel scelerisque nisl consectetur et. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
+            </section>
+
+            <h1>another headline goes here</h1>
+            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis</p>
+
+            <h2>what's included in your free coffee decision kit:</h2>
+            <section class="three-col clearfix">
+                <article class="swag smaller">
+                    <h2>2 Samples</h2>
+                    <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                </article>
+                <article class="swag smaller">
+                    <h2>a DVD</h2>
+                    <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                </article>
+                <article class="swag larger">
+                    <h2>20 page Mini-Magazine</h2>
+                    <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                </article>
+            </section>
+            <h2>want more information from member's Name?</h2>
+            <section id="more-info">
+            <p>Sed posuere consectetur est at lobortis. Nulla vitae elit libero, a pharetra augue. Nullam id dolor id nibh ultricies vehicula ut id elit. Aenean eu leo quam. Pellentesque ornare </p>
+            <form method="post" action="#" id="get-info">
+                <ul>
+                    <li>
+                        <label for="first-name">First Name</label>
+                        <input type="text" name="first-name" title="first-name">
+                    </li>
+                    <li class="no-margin">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" name="last-name" title="last-name">
+                    </li>
+                    <li>
+                        <label for="message">Message</label>
+                        <textarea cols="20"></textarea>
+                    </li>
+                    <li class="no-margin">
+                        <label for="email">Email</label>
+                        <input type="text" title="email" name="email">
+                    </li>
+                    <li class="no-margin">
+                        <input type="submit" value="send message" class="button">
+                    </li>
+                </ul>
+            </form>
+            </section>
+        </div>
+        <div id="right-col">
+            <span class="coffee-cup"></span>
+            <h1>I want a <em>FREE</em> Decision Kit!</h1>
+            <h2>Just pay $9.99 for Shipping &amp; Handling</h2>
+
+
+            <form action="{{ submit_url }}" id="free-kit-signup" method="post">
+                {% csrf_token %}
+                {{ forms.form_errors(form) }}
+
+                <h1 style="margin-top: 1em;">Enter your contact information:</h1>
+                <ul class="forms">
+                    {{ forms.form_field(form.transaction__credit_card__cardholder_name) }}
+                    {{ forms.form_field(form.transaction__customer__email) }}
+                    {{ forms.form_field(form.transaction__customer__phone) }}
+                </ul>
+
+                <h1 style="margin-top: 1em;">Enter your shipping address:</h1>
+                <ul class="forms">
+                    {{ forms.form_field(form.transaction__billing__street_address) }}
+                    {{ forms.form_field(form.transaction__billing__extended_address) }}
+                    {{ forms.form_field(form.transaction__billing__country_code_alpha2, class="auto-country") }}
+                    <li>
+                        <div id="auto-country" class="clearfix">
+                            {{ forms.form_field_label(form.postal) }}
+                            {{ forms.form_field_description(form.postal) }}
+                            {{ forms.form_field_errors(form.postal) }}
+                            <div style="float: left;">
+                                <div class="field">{{ form.postal(class="small auto-zip") }}</div>
+                            </div>
+                            <div style="float: left; margin-left: 1em;">
+                                {{ form.transaction__billing__locality(tabindex="-1", style="width: 100px; color: #666;", class="auto-city") }}
+                            </div>
+                            <div style="float: left; margin-left: 1em;">
+                                {{ form.transaction__billing__region(tabindex="-1", style="width: 75px; color: #666;", class="auto-state") }}
+                            </div>
+                        </div>
+                        <p style="padding-top: 0.75em;">*We will try to fill in the city and state when you enter a zip code.</p>
+                    </li>
+                </ul>
+
+                <h1 style="margin-top: 1em;">Credit Card Information:</h1>
+                <div class="clearfix">
+                    <img src="{{STATIC_URL}}img/Braintree.png" alt="Braintree" width="131" height="35" style="float: right;"/>
+                    <p>This form submits to a 2048-bit encrypted SSL location</p>
+                </div>
+
+                <ul class="forms">
+                    {{ forms.form_field(form.transaction__billing__postal_code, class="small") }}
+                    {{ forms.form_field(form.transaction__credit_card__number) }}
+                    <li style="text-align: right; margin-top: 0.5em;">
+                        <img src="{{STATIC_URL}}img/new/card_strip.png" alt="cc-icons" />
+                    </li>
+                    {#
+                    <li>
+                        <div class="clearfix">
+                            <div style="float: left;">
+                                {{ forms.form_field_label(form.expdate) }}
+                                {{ forms.form_field_description(form.expdate) }}
+                                {{ forms.form_field_errors(form.expdate) }}
+                                <div class="field">{{ form.expdate(class="small") }}</div>
+                            </div>
+                            <div style="float: left; margin-left: 3em;">
+                                {{ forms.form_field_label(form.transaction__credit_card__cvv) }}
+                                {{ forms.form_field_description(form.transaction__credit_card__cvv) }}
+                                {{ forms.form_field_errors(form.transaction__credit_card__cvv) }}
+                                <div class="field">{{ form.transaction__credit_card__cvv(class="small") }}</div>
+                            </div>
+                        </div>
+                    </li>
+                     #}
+                    {{ forms.form_field(form.expdate) }}
+                    {{ forms.form_field(form.transaction__credit_card__cvv, class="small") }}
+                    {{ forms.form_field(form.tr_data) }}
+                </ul>
+                <input type="submit" value="Place my order!" class="order">
+            </form>
+        </div>
+
+
+    </div> <!-- .wrapper -->
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+    $(function(){
+        $('input.auto-zip').change(function(evt){
+            var zipcode = $(evt.target).val();
+
+            var other_zip = $('#transaction__billing__postal_code');
+            if (other_zip.val() === '') {
+                other_zip.val(zipcode);
+            }
+
+
+            var country = $('.auto-country');
+            var countryCode = 'US';
+            if (country.length == 1) {
+                countryCode = country.val();
+            }
+            $.rpc('http://organogold.securehomeoffice.com/api/v3/public-rpc/', {method: 'geo.postalLookup', params: [countryCode, zipcode]})
+                    .done(function(data){
+                        $('input.auto-city').val(data.locality);
+                        $('input.auto-state').val(data.region);
+                    })
+                    .fail(function(){
+                        $('input.auto-city').val('');
+                        $('input.auto-state').val('');
+                    });
+        });
+
+    });
+    </script>
+
+    <script src="{{STATIC_URL}}js/plugins.js"></script>
+    <script src="{{STATIC_URL}}js/libs/json2.js"></script>
+    <!-- <script src="{{STATIC_URL}}/js/script.js"></script> -->
+    <script src="{{STATIC_URL}}js/mylibs/prettyPhoto_compressed_3.1.2/js/jquery.prettyPhoto.js"></script>
+    <!-- end scripts-->
+
+    <script type="text/javascript">
+        o =
+        o.fail(function(reason) {
+            window.log(reason);
+        });
+        o.done(function(data) {
+            window.log(data);
+        })
+    </script>
+
+    <!--[if lt IE 7 ]>
+    <script src="{{STATIC_URL}}/js/libs/dd_belatedpng.js"></script>
+    <script>DD_belatedPNG.fix("img, .png_bg");</script>
+    <![endif]-->
+
+    <script type="text/javascript" >
+    $(document).ready(function(){
+    $("a[rel^='prettyPhoto']").prettyPhoto();
+    });
+    </script>
+
+
+    <script>
+    var _gaq=[["_setAccount","UA-XXXXX-X"],["_trackPageview"]]; // Change UA-XXXXX-X to be your site's ID
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+    g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
+    s.parentNode.insertBefore(g,s)}(document,"script"));
+    </script>
+
+</body>
+</html>

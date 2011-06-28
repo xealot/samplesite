@@ -1,0 +1,25 @@
+- application: mycoffeebiz
+  mvh: normal
+  hostname:  ubuntu.local
+  port: 8080
+
+  webroot: mycoffeebiz/static #Protect the root
+  try_files: "$uri @app"
+
+  handlers:
+  - url: "@app"
+    runtime: python
+    module: "mycoffeebiz.wsgi:application"
+
+- application: ogsample
+  mvh: normal
+  hostname: ubuntu.local
+  port: 8081
+
+  webroot: ogsample/static
+  try_files: "$uri @app"
+
+  handlers:
+  - url: "@app"
+    runtime: python
+    module: "ogsample.wsgi:application"

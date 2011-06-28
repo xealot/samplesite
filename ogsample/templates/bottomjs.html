@@ -1,0 +1,58 @@
+<!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/shadowbox.js"></script>
+<script type="text/javascript">
+Shadowbox.init();
+function toTitleCase(str) {
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
+
+$(function(){
+    $('label.show_pass input[type=checkbox]').change(function(e){
+        var ele = $(e.target);
+        var field_id = ele.attr('id').slice(1);
+        var input = $('#'+field_id);
+        if (input.length > 0) {
+            var output = input.clone();
+            if (this.checked) {
+                output.attr('type', 'text');
+            } else {
+                output.attr('type', 'password');
+            }
+            console.log(output);
+            input.replaceWith(output);
+        }
+    });
+    
+    $('input.auto-zip').change(function(evt){
+        var zipcode = $(evt.target).val();
+        var country = $('.auto-country');
+        var countryCode = 'US';
+        if (country.length == 1) {
+            countryCode = country.val();
+        }
+        $.getJSON('/api/zip/'+countryCode+'/'+zipcode+'/').success(function(data) {
+            $('input.auto-city').val(toTitleCase(data.locality));
+            $('input.auto-state').val(data.region);
+        }).error(function(){
+            $('input.auto-city').val('');
+            $('input.auto-state').val('');
+        });
+    });
+    
+});
+
+</script>
+
+<!--[if lt IE 7 ]>
+    <script src="/static/js/libs/dd_belatedpng.js"></script>
+    <script>DD_belatedPNG.fix('img, .png_bg'); // Fix any <img> or .png_bg bg-images. Also, please read goo.gl/mZiyb </script>
+<![endif]-->
+
+<!--  Change UA-XXXXX-X to be your site's ID -->
+<script>
+var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>

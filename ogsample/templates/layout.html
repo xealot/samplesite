@@ -1,0 +1,116 @@
+{% import 'macros/forms.html' as forms %}
+
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title>OGSamples</title>
+    <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/static/css/shadowbox.css">
+    {% if true %}
+    <link rel="stylesheet/less" type="text/css" href="/static/css/style.less">
+    <script src="http://lesscss.googlecode.com/files/less-1.0.41.min.js"></script>
+    {% else %}
+    <link rel="stylesheet" type="text/css" href="/static/css/compiled.css">
+    {% endif %}
+
+    <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
+    <script src="/static/js/libs/modernizr-1.7.min.js"></script>
+</head>
+
+{% block fullpage %}
+<body>
+
+    <div id="container">
+        <header>
+                <div class="shim">
+                    <div id="top-header" class="clearfix">
+                        <div id="logo">
+                            <a href="/" title="Organo Gold Logo"><img src="/static/img/logo.png" alt="Organo Gold" /></a>
+                        </div>
+                        <div id="header-right">
+                                {% if user.is_authenticated() %}
+                                <p>Welcome back, {{user.alias}}</p>
+                                {% else %}
+                                <p>Welcome to the OG Sample Solution.</p>
+                                {% endif %}
+                                <div id="util-buttons">
+                                    {% if user.is_authenticated() %}
+                                    <a id="edit-profile" href="Edit-Profile.html">EDIT PROFILE</a>
+                                    <a id="logout" href="{{ url_for('logout') }}">LOGOUT</a>
+                                    {% else %}
+                                    <a id="login" href="{{ url_for('login') }}">LOGIN</a>
+                                    {% endif %}
+                                </div>
+                        </div>
+                    </div>
+                    <div id="sub-header" class="clearfix">
+                        {% if user.is_authenticated() %}
+                        <div id="sub-left">
+                            <a href="{{url_for('start')}}"><img src="/static/img/icon-home.png" alt="Back to Home"> HOME</a>
+                        </div>    
+                        <div id="sub-right" class="clearfix">
+                            <h3>It's As Easy As</h3>
+                            <a href="{{url_for('start')}}" class="steps {% if step == 1 %}active{% endif %}">1</a>
+                            <a href="{{url_for('step_two')}}" class="steps {% if step == 2 %}active{% endif %}">2</a>
+                            <a href="{{url_for('step_three')}}" class="steps {% if step == 3 %}active{% endif %}">3</a>
+                        </div>
+                        {% else %}
+                        <h2>Welcome to the Sample Solution!</h2>
+                        {% endif %}
+                    </div>
+                </div>
+        </header>
+    
+        <div id="banner">
+            <div id="banner-content">
+                <h2>{% block heading %}{% endblock %}</h2>
+            </div>
+            <div id="banner-btm"><!-- sliding BG --></div>
+        </div>
+        <div id="main">
+            <div id="content">
+                <div class="shim">
+                {% if messages %}
+                    <ul class="flashes">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}">{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+                {% block body %}{% endblock %}
+                </div>
+            </div>
+            <div id="content-btm"><!-- sliding BG --></div>
+        </div>
+    <!-- /container -->
+    </div>
+    
+    <footer class="clearfix">
+        <div>
+            <p>
+            &copy;2011 OGsamples.com<br />
+            email: <a href="mailto:contact@ogsamples.com">contact@ogsamples.com</a><br />
+            phone: 800.555.5555
+            </p>
+        </div>
+        <div>
+            <a href="Question.html">Have A Question?</a> | 
+            <a href="Privacy-Policy.html">Privacy Policy</a>
+        </div>
+        <div>
+            <a href="https://www.braintreegateway.com/merchants/YOUR_MERCHANT_ID/verified" target="_blank" title="Secured By Braintree"><img src="/static/img/securedby-braintree.png" alt="Secured by Braintree" /></a>
+        </div>
+    </footer>
+  </div> <!--! end of #container -->
+{% include 'bottomjs.html' %}
+{% block pagejs %}{% endblock %}
+</body>
+{% endblock fullpage %}
+</html>

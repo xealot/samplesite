@@ -1,0 +1,22 @@
+<uwsgi>
+    <vhost-host/>
+    <master/>
+    <gid>www-data</gid>
+    <uid>www-data</uid>
+    <catch-exceptions/>
+    <chmod-socket/>
+    <idle>600</idle>
+    <max-requests>1000</max-requests>
+    <processes>4</processes>
+    <threads>50</threads>
+    <no-orphans/>
+    <enable-threads/>
+    <reload-mercy>5</reload-mercy>
+    <socket>/var/tmp/uwsgi.sock</socket>
+    <pidfile>/var/run/uwsgi.pid</pidfile>
+    <!-- <daemonize>/var/log/uwsgi.log</daemonize> -->
+    <!-- <disable-logging/> -->
+    <vacuum/>
+    <!-- <no-default-app/> This option can return errors while an app is initializing. -->
+    <!-- <reload-on-rss>128</reload-on-rss> Reload at 128MB of RSS (memory usage) -->
+</uwsgi>

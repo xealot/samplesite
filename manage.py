@@ -1,0 +1,1 @@
+./thirdparty/django/bin/django-admin.py

@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block heading %}Address Validation.{% endblock %}
+
+{% block body %}
+<p>
+    To offer the highest level of customer service, and to verify that your sample will be delivered successfully and on
+    time, please review the address you entered for accuracy.
+</p>
+<div class="window">
+    <div class="header">
+        <h2>USPS&trade; Address Validation</h2>
+    </div>
+    <div class="body">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="form">
+                <table class="address-display">
+                    <caption>Original Address</caption>
+                    <tr><th>Suite or Bldg#</th><td>{{addr.unit or '--'}}</td></tr>
+                    <tr><th>Street</th><td>{{sample.address1}}</td></tr>
+                    <tr><th>City</th><td>{{sample.city}}</td></tr>
+                    <tr><th>State</th><td>{{sample.state}}</td></tr>
+                    <tr><th>Zip Code</th><td>{{sample.postal}}</td></tr>
+                </table>
+
+                {% if addr %}
+                    <table class="address-display">
+                        <caption>USPS&trade; Verified Address</caption>
+                        <tr><th>Suite or Bldg#</th><td>{{addr.unit or '--'}}</td></tr>
+                        <tr><th>Street</th><td>{{addr.street}}</td></tr>
+                        <tr><th>City</th><td>{{addr.city}}</td></tr>
+                        <tr><th>State</th><td>{{addr.state}}</td></tr>
+                        <tr><th>Zip Code</th><td>{{addr.zip}}-{{addr.zip4}}</td></tr>
+                    </table>
+                {% else %}
+                    <p class="notice">
+                        We could not validate the address as you entered it.
+                    </p>
+                {% endif %}
+            </div>
+            <div class="form">
+                {% if addr %}
+                    <button type="submit">Use Verified Address</button>
+                {% endif %}
+                <a href="{{url_for('step_one_edit', kwargs={'pending_id': id})}}" class="button">Re-Enter Address</a>
+                <a href="{{url_for('step_two')}}" class="button minor">*Keep Original</a>
+                <p>
+                    *If you choose to keep the original address, your package may be delayed.
+                </p>
+            </div>
+        </form>
+    </div>
+</div>
+<p>
+    <strong>Our Guarantee:</strong> Your contact's information is never, <u>ever</u> going to be sold. The information 
+    you enter here is considered private and sensitive and is treated as such.
+</p>
+
+{% endblock %}

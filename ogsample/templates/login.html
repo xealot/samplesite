@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% import 'macros/forms.html' as forms %}
+
+    <div style="float: left; width: 49%;">
+        <h2>Login</h2>
+        <form method="POST" action="">
+            {{ forms.form_fields(login_form) }}
+            <input type="submit" name="type" value="Login" />
+        </form>
+    </div>
+    
+    <div style="float: left; width: 49%;">
+        <h2>Sign Up</h2>
+        <form method="POST" action="">
+            {{ forms.form_fields(register_form) }}
+            <input type="submit" name="type" value="Register Now" />
+        </form>
+    </div>
+
+{% block fullpage %}
+<body id="login-page">
+    <div id="login-container" class="window">
+        <div id="login-container-top">
+            <div id="login-image">
+                <a href="/" title="Organo Gold Logo"><img src="/static/img/logo-login.png" alt="Organo Gold" /></a>
+            </div>
+            <h1 id="login-container-title">Member Login</h1>
+        </div>
+        <div id="login-container-bottom" class="body">
+            {% if messages %}
+                <ul class="flashes">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+            <form id="login" action="" method="post">
+                {% csrf_token %}
+                {{ forms.form_errors(login_form) }}
+                {{ forms.form_fields(login_form) }}
+                <div class="form">
+                    <button type="submit">Login</button>
+                    <a class="button minor" href="{{url_for('signup')}}">I don't have an account</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    {% include 'bottomjs.html' %}
+</body>
+{% endblock fullpage %}
+</html>

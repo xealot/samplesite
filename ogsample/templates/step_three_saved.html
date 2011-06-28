@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block heading %}Step Three: Checkout.{% endblock %}
+
+{% block body %}
+<div class="window">
+    <div class="header">
+        <h2>Confirm Saved Information.</h2>
+    </div>
+    <div class="body">
+            <div id="secure-form-box">
+                <div id="secure-content" class="clearfix">
+                    <div id="secure-title">
+                        <h3>Secure Credit Card Payment</h3>
+                        <p>This form submits to a 2048-bit encrypted SSL location.</p>
+                    </div>
+                    <div id="secured-by">
+                        <a  href="https://www.braintreegateway.com/merchants/ss37wjw57f8wz9k4/verified" target="_blank">
+                            <img src="https://braintree-badges.s3.amazonaws.com/05.png" border="0" alt="Secured by Braintree"/>
+                        </a>
+                    </div>
+                </div>
+                <div class="form">
+                    {% with cc = customer.credit_cards[0] %}
+                    You are about to use a method of payment stored in the vault, please glance at 
+                        the details to see if this payment is correct.
+                    <p style="font-weight: bold; color: black; font-size: 1.1em;">{{cc.cardholder_name}}, {{cc.card_type}} {{cc.masked_number}}, expires {{cc.expiration_date}}</p>
+                    {% endwith %}
+
+                </div>
+            </div>
+            <div class="form">
+                <p>When you click the <strong>Submit My Order</strong> button the information you entered will be validated and then 
+                    sent to our warehouse where your samples will be printed and shipped.</p>
+                    <a href="{{url_for('complete')}}" class="button">Complete My Order</a>
+                    <a href="{{url_for('forget')}}" class="button minor">*Erase Card</a>
+                <p style="color: #999;">* When "Forget Details" is selected your payment information will be permanently and securely removed from the Vault and 
+                    you will be given a chance to enter your information manually.</p>
+            </div>
+    </div>
+</div>
+
+{% endblock %}

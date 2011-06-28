@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block heading %}Create Account.{% endblock %}
+
+{% block body %}
+<div class="window">
+    <div class="header">
+        <h2>Enter Contact Details Below</h2>
+    </div>
+    <div class="body">
+        <form id="stepone" action="" method="post">
+            {{ forms.form_errors(form) }}
+            {{ forms.form_fields(form) }}
+            <div class="form">
+                <button id="login-btn" type="submit">Create My User</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
