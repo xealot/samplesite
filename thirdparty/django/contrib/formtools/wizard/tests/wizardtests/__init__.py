@@ -1,1 +1,1 @@
-from django.contrib.formtools.wizard.tests.wizardtests.tests import *
+from django.contrib.formtools.wizard.tests.wizardtests.tests import *
