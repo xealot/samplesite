@@ -1,3 +1,4 @@
+#rewrite ^/(.*)/favicon.ico$ /favicon.ico last;
 - application: mycoffeebiz
   mvh: normal
   hostname:  ubuntu.local

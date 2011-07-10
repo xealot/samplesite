@@ -22,8 +22,7 @@ def index(request):
             return redirect_to(request, reverse('index'), permanent=False)
 
         if result.is_success:
-            print 'SUCCESS'
-            #return redirect(url_for('complete', tran_id=result.transaction.id))
+            return redirect_to(reverse('complete', kwargs={'tran_id': result.transaction.id}))
         submitted = result.params['transaction']
         form = SampleForm(
             transaction__customer__email=                       submitted['customer']['email'],
@@ -74,7 +73,11 @@ def index(request):
     return {'form': form, 'submit_url': submit_url}
 
 @render_to('thankyou.html')
-def thankyou(request):
+def complete(request, tran_id):
+    return {}
+
+@render_to('no-site.html')
+def no_site(request):
     return {}
 
 

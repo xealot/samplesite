@@ -36,6 +36,7 @@ def datetime_json_object_hook(obj):
 
 
 class HomeplateException(Exception): pass
+class SafeHomeplateException(HomeplateException): pass
 
 
 class JSONRPCHandler(object):
@@ -68,10 +69,10 @@ class JSONRPCHandler(object):
         try:
             response = urllib2.urlopen(request)
         except urllib2.HTTPError, e:
-            print e.read()
-            raise HomeplateException(e.code)
+            print 'RPC ERROR', self.url, request.data, e.read()
+            raise HomeplateException('HP Returned an Error Code of: %s' % e.code)
         except urllib2.URLError, e:
-            raise HomeplateException(e.reason)
+            raise HomeplateException('HTTP Request Failed: %s' % e.reason)
 
         json_response = response.read()
         result = self._decode(json_response)
@@ -79,11 +80,11 @@ class JSONRPCHandler(object):
         if 'result' in result:
             return result['result']
         elif 'error' in result:
-            print json_response
-            raise HomeplateException(result['error']['reason'])
+            #print json_response
+            raise SafeHomeplateException(result['error']['reason'])
         else:
-            print json_response
-            raise HomeplateException('Invalid Response')
+            #print json_response
+            raise SafeHomeplateException('Invalid Response')
 
     def multi(self, invocations):
         print invocations
@@ -130,7 +131,7 @@ class JSONRPCRequest(object):
         assert (bool(a) ^ bool(kw)) or (not bool(a) and not bool(kw)), "Mixing keyword arguments and non is not allowed"
         try:
             return self.handler.call(self.current, (a or kw))
-        except HomeplateException as e:
+        except SafeHomeplateException as e:
             if safe is True:
                 return None
             raise e

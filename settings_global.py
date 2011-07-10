@@ -1,5 +1,7 @@
-import site
-site.addsitedir('./thirdparty')
+import site, os
+site.addsitedir(os.path.abspath('./thirdparty'))
+
+ROOT_PATH = os.path.abspath(os.path.dirname(__file__)) #For referencing templates and files.
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -44,7 +46,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
+    'extra.middleware.urlsession.URLSessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -55,7 +57,7 @@ MIDDLEWARE_CLASSES = (
 )
 
 TEMPLATE_DIRS = (
-    'templates/',
+    ROOT_PATH + '/templates/',
 )
 
 INSTALLED_APPS = (
@@ -72,17 +74,40 @@ INSTALLED_APPS = (
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'basic': {
+            'format': '%(levelname)s [%(name)s] %(message)s'
+        },
+    },
     'handlers': {
+        'null': {
+            'level':'DEBUG',
+            'class':'django.utils.log.NullHandler',
+        },
+        'console':{
+            'level':'DEBUG',
+            'class':'logging.StreamHandler',
+            'formatter': 'basic'
+        },
         'mail_admins': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler'
         }
     },
     'loggers': {
+        'django.db': {
+            'handlers': ['null'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
         'django.request': {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
             'propagate': True,
         },
+    },
+    'root': {
+        'handlers': ['console'] if DEBUG else ['null'],
+        'level': 'DEBUG',
     }
 }
